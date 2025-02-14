@@ -7,8 +7,8 @@ const Offers = () => {
     
         <div className="offers">
             <div className="offers-left">
-                <h1>Exclusive</h1>
-                <h1>Offers For You</h1>
+                <h1>Exclusive Offers</h1>
+                <h1>For You Farmers</h1>
                 <p>ONLY ON BEST SELLERS PRODUCTS</p>
                 <button>Check Now</button>
             </div>

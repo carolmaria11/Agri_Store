@@ -18,8 +18,8 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="nav-logo">
-        <img src={logo} alt="" />
-        <p>SHOPPER</p>
+        <img src={"/logo.svg"} alt="" />
+        {/* <p>SHOPPER</p> */}
       </div>
       <img
         className="nav-dropdown"
@@ -33,7 +33,7 @@ const Navbar = () => {
             setMenu("shop");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="/">
+          <Link style={{ textDecoration: "none" , color:"green"}} to="/">
             Shop
           </Link>
           {menu === "shop" ? <hr /> : <></>}
@@ -43,8 +43,8 @@ const Navbar = () => {
             setMenu("mens");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="/mens">
-            Men
+          <Link style={{ textDecoration: "none" ,color:"green"}} to="/mens">
+          Seeds
           </Link>
           {menu === "mens" ? <hr /> : <></>}
         </li>
@@ -53,8 +53,8 @@ const Navbar = () => {
             setMenu("womens");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="/womens">
-            Women
+          <Link style={{ textDecoration: "none",color:"green" }} to="/womens">
+          Farming Equipment 
           </Link>
           {menu === "womens" ? <hr /> : <></>}
         </li>
@@ -63,8 +63,8 @@ const Navbar = () => {
             setMenu("kids");
           }}
         >
-          <Link style={{ textDecoration: "none" }} to="/kids">
-            Kids
+          <Link style={{ textDecoration: "none",color:"green" }} to="/kids">
+          Fertilizers 
           </Link>
           {menu === "kids" ? <hr /> : <></>}
         </li>

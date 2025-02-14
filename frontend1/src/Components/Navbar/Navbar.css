@@ -10,11 +10,14 @@
     align-items: center;
     gap: 10px;
 }
-.nav-logo p{
+.nav-logo img{
+    height: 60px;
+}
+/* .nav-logo p{
     color: #171717;
     font-size: 38px;
     font-weight: 600;
-}
+} */
 .nav-menu{
     display: flex;
     align-items: center;
@@ -38,7 +41,7 @@
     width: 80%;
     height: 3px;
     border-radius: 10px;
-    background: #FF4141;
+    background: #7a0606;
 }
 .nav-login-cart{
     display: flex;
