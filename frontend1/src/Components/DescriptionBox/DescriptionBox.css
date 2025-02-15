@@ -1,41 +1,76 @@
-.descriptionbox{
+.descriptionbox {
     margin: 120px 170px;
-}
-.descriptionbox-navigator{
+    background: linear-gradient(135deg, #ffffff, #f9fafb);
+    border-radius: 20px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .descriptionbox:hover {
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .descriptionbox-navigator {
     display: flex;
-}
-.descriptionbox-nav-box{
+    background: #d1e8d1;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .descriptionbox-nav-box {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     width: 171px;
     height: 70px;
-    border: 1px solid #d0d0d0;
-}
-.descriptionbox-nav-box.fade{
-    background: #fbfbfb;
-    color: #555;
-}
-.descriptionbox-description{
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    color: #4a5568;
+  }
+  
+  .descriptionbox-nav-box:hover {
+    background: #e2e8f0;
+    color: #2d3748;
+    border-bottom: 3px solid #2b6cb0;
+  }
+  
+  .descriptionbox-nav-box.fade {
+    background: #f7fafc;
+    color: #718096;
+  }
+  
+  .descriptionbox-description {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    border: 1px solid #d0d0d0;
+    background: #fff;
     padding: 48px;
     padding-bottom: 70px;
-}
-@media (max-width:1280px){
-    .descriptionbox{
-        margin: 60px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .descriptionbox-description p {
+    line-height: 1.8;
+    color: #4a5568;
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  @media (max-width: 1280px) {
+    .descriptionbox {
+      margin: 60px;
     }
-}
-@media (max-width:800px){
-    .descriptionbox{
-        margin: 60px 20px;
+  }
+  
+  @media (max-width: 800px) {
+    .descriptionbox {
+      margin: 60px 20px;
     }
-    .descriptionbox-description{
-        font-size: 14px;
+    .descriptionbox-description {
+      font-size: 14px;
+      padding: 30px;
     }
-}
+  }

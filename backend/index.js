@@ -71,6 +71,10 @@ const Product = mongoose.model("Product", {
     type: Number,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,
@@ -99,6 +103,7 @@ app.post("/addproduct", async (req, res) => {
     category: req.body.category,
     new_price: req.body.new_price,
     old_price: req.body.old_price,
+    description: req.body.description,
   });
   console.log(product);
   await product.save();
@@ -238,12 +243,12 @@ app.get("/newcollections", async (req, res) => {
   res.send(newcollection);
 });
 
-//creating endpoint for popular in women section
-app.get("/popularinwomen", async (req, res) => {
-  let products = await Product.find({ category: "women" });
-  let popular_in_women = products.slice(0, 4);
-  console.log("Popular in women fetched");
-  res.send(popular_in_women);
+//creating endpoint for popular in Farming_Equipment section
+app.get("/popularinFarming_Equipment", async (req, res) => {
+  let products = await Product.find({ category: "Farming Equipment" });
+  let popular_in_Farming_Equipment = products.slice(0, 4);
+  console.log("Popular in Farming_Equipment fetched");
+  res.send(popular_in_Farming_Equipment);
 });
 
 //creating middleware to fetch user

@@ -1,131 +1,167 @@
 import React, { useState } from "react";
 import "./AddProduct.css";
-import upload_area from "../../assets/upload_area.svg";
+import uploadArea from "../../assets/upload_area.svg";
 
 const AddProduct = () => {
-  const [image, setImage] = useState(false);
+  // State for image and product details
+  const [image, setImage] = useState(null);
   const [productDetails, setProductDetails] = useState({
     name: "",
+    description: "", // Added product description
     image: "",
-    category: "women",
+    category: "Farming_Equipment",
     new_price: "",
     old_price: "",
   });
 
-  const imageHandler = (e) => {
-    setImage(e.target.files[0]);
-  };
-  const changeHandler = (e) => {
-    setProductDetails({ ...productDetails, [e.target.name]: e.target.value });
+  // Handle image selection
+  const handleImageChange = (event) => {
+    setImage(event.target.files[0]);
   };
 
-  const Add_Product = async () => {
-    console.log(productDetails);
-    let responseData;
-    let product = productDetails;
+  // Handle input changes for product details
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setProductDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
 
-    let formData = new FormData();
-    formData.append("product", image);
+  // Function to upload image and add product
+  const handleAddProduct = async () => {
+    try {
+      // Image Upload
+      const formData = new FormData();
+      formData.append("product", image);
 
-    await fetch("http://localhost:4000/upload", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: formData,
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        responseData = data;
-      });
-
-    if (responseData.success) {
-      product.image = responseData.image_url;
-      console.log(product);
-      await fetch("http://localhost:4000/addproduct", {
+      const imageUploadResponse = await fetch("http://localhost:4000/upload", {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify(product),
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          data.success ? alert("Product Added") : alert("Failed");
-        });
+        body: formData,
+      });
+
+      const imageData = await imageUploadResponse.json();
+
+      if (imageData.success) {
+        const updatedProductDetails = {
+          ...productDetails,
+          image: imageData.image_url,
+        };
+
+        // Add Product
+        const productAddResponse = await fetch(
+          "http://localhost:4000/addproduct",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedProductDetails),
+          }
+        );
+
+        const productData = await productAddResponse.json();
+        productData.success
+          ? alert("Product Added Successfully!")
+          : alert("Failed to Add Product");
+      }
+    } catch (error) {
+      console.error("Error while adding product:", error);
+      alert("An error occurred. Please try again.");
     }
   };
 
   return (
     <div className="add-product">
+      {/* Product Title */}
       <div className="addproduct-itemfield">
         <p>Product Title</p>
         <input
-          value={productDetails.name}
-          onChange={changeHandler}
           type="text"
           name="name"
+          value={productDetails.name}
+          onChange={handleInputChange}
           placeholder="Type here"
         />
       </div>
+
+      {/* Product Description */}
+      <div className="addproduct-itemfield">
+        <p>Product Description</p>
+        <textarea
+          name="description"
+          value={productDetails.description}
+          onChange={handleInputChange}
+          // placeholder="Describe the product"
+          cols="187"
+          rows="4"
+        />
+      </div>
+
+      {/* Product Prices */}
       <div className="addproduct-price">
         <div className="addproduct-itemfield">
           <p>Price</p>
           <input
-            value={productDetails.old_price}
-            onChange={changeHandler}
             type="text"
             name="old_price"
+            value={productDetails.old_price}
+            onChange={handleInputChange}
             placeholder="Type here"
           />
         </div>
         <div className="addproduct-itemfield">
           <p>Offer Price</p>
           <input
-            value={productDetails.new_price}
-            onChange={changeHandler}
             type="text"
             name="new_price"
+            value={productDetails.new_price}
+            onChange={handleInputChange}
             placeholder="Type here"
           />
         </div>
       </div>
+
+      {/* Product Category */}
       <div className="addproduct-itemfield">
         <p>Product Category</p>
         <select
-          value={productDetails.category}
-          onChange={changeHandler}
           name="category"
+          value={productDetails.category}
+          onChange={handleInputChange}
           className="add-product-selector"
+          style={{ width: "200px" }}
         >
-          <option value="women">Women</option>
-          <option value="men">Men</option>
-          <option value="kid">Kid</option>
+          <option value="Farming_Equipment">Farming Equipment</option>
+          <option value="Seeds">Seeds</option>
+          <option value="Fertilizer">Fertilizer</option>
         </select>
       </div>
+
+      {/* Image Upload */}
       <div className="addproduct-itemfield">
         <label htmlFor="file-input">
           <img
-            src={image ? URL.createObjectURL(image) : upload_area}
+            src={image ? URL.createObjectURL(image) : uploadArea}
             className="addproduct-thumbnail-img"
-            alt=""
+            alt="Upload Preview"
           />
         </label>
         <input
-          onChange={imageHandler}
           type="file"
           name="image"
           id="file-input"
+          onChange={handleImageChange}
           hidden
         />
       </div>
-      <button
-        onClick={() => {
-          Add_Product();
-        }}
-        className="addproduct-btn"
-      >
+
+      {/* Submit Button */}
+      <button onClick={handleAddProduct} className="addproduct-btn">
         ADD
       </button>
     </div>

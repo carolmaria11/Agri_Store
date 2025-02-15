@@ -17,16 +17,16 @@ function App() {
         <Routes>
           <Route path="/" element={<Shop />} />
           <Route
-            path="/mens"
-            element={<ShopCategory banner={banner} category="men" />}
+            path="/Seeds"
+            element={<ShopCategory banner={banner} category="Seeds" />}
           />
           <Route
-            path="/womens"
-            element={<ShopCategory banner={banner} category="women" />}
+            path="/Farming_Equipment"
+            element={<ShopCategory banner={banner} category="Farming_Equipment" />}
           />
           <Route
-            path="/kids"
-            element={<ShopCategory banner={banner} category="kid" />}
+            path="/Fertilizer"
+            element={<ShopCategory banner={banner} category="Fertilizer" />}
           />
           <Route path="/product" element={<Product />}>
             <Route path=":productId" element={<Product />} />

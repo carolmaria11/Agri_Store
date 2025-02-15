@@ -11,12 +11,12 @@ const ProductDisplay = (props) => {
   return (
     <div className="productdisplay">
       <div className="productdisplay-left">
-        <div className="productdisplay-img-list">
+        {/* <div className="productdisplay-img-list">
           <img src={product.image || "placeholder.jpg"} alt="Product" />
           <img src={product.image || "placeholder.jpg"} alt="Product" />
           <img src={product.image || "placeholder.jpg"} alt="Product" />
           <img src={product.image || "placeholder.jpg"} alt="Product" />
-        </div>
+        </div> */}
         <div className="productdisplay-img">
           <img
             className="productdisplay-main-img"
@@ -47,7 +47,7 @@ const ProductDisplay = (props) => {
         <div className="productdisplay-right-description">
           {product.description || "No description available for this product."}
         </div>
-        <div className="productdisplay-right-size">
+        {/* <div className="productdisplay-right-size">
           <h1>Select Size</h1>
           <div className="productdisplay-right-sizes">
             <div>S</div>
@@ -56,7 +56,7 @@ const ProductDisplay = (props) => {
             <div>XL</div>
             <div>XXL</div>
           </div>
-        </div>
+        </div> */}
         <button
           onClick={() => {
             if (product.id) {
