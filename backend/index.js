@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
     return cb(
       null,
       `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
-    );
+    ); 
   },
 });
 
@@ -308,6 +308,16 @@ app.get("/getcart", fetchUser, async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname, '/frontend1/dist')));
+
+  app.get('*', (req, res) => {  
+    res.sendFile
+    (path.resolve(__dirname, 'frontend1', 'dist', 'index.html')) ;
+  }
+  );    
+}
 
 app.listen(port, (error) => {
   if (!error) {
